@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var choiceRouter = require('./routes/choice');
+var lessonRouter = require('./routes/lesson');
+var movementRouter = require('./routes/movement');
 
 var test = require('./routes/test');
 
@@ -36,6 +38,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/choice', choiceRouter);
+app.use('/lesson', lessonRouter);
+app.use('/movement', movementRouter);
 
 app.use('/test', test);
 
