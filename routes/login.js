@@ -17,25 +17,29 @@ var responseJSON = function (res, ret) {
     }
 };
 // 用户登录
-router.get('/', function (req, res, next) {
+router.post('/', function (req, res, next) {
     // 从连接池获取连接 
     pool.getConnection(function (err, connection) {
         // 获取前台页面传过来的参数  
-        var param = req.query || req.params
+        // get方法写法
+        // var param = req.query || req.params
+
+        // post方法写法
+        var param = req.body.params;
         // 建立连接 增加一个用户信息 
-        connection.query(userSQL.isUser, [param.username,param.password], function (err, result) {
+        console.log(param);
+        connection.query(userSQL.isUser, [param.username, param.password], function (err, result) {
             //登陆成功返回个人信息
             console.log(result[0]["COUNT(*)"]);
             if (result[0]["COUNT(*)"]) {
                 connection.query(userSQL.getUserInfo, [param.username], function (err, result) {
-                    // console.log(result);
                     if (result) {
                         result = {
                             status: 200,
                             msg: '登录成功',
-                            data:result
+                            data: result
                         };
-                    }else{
+                    } else {
                         result = {
                             status: 201,
                             msg: '登录失败',
@@ -49,7 +53,7 @@ router.get('/', function (req, res, next) {
                     connection.release();
 
                 });
-            }else{
+            } else {
                 res.json({
                     status: 201, msg: '登录失败'
                 });

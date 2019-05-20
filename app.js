@@ -5,14 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+
 var choiceRouter = require('./routes/choice');
-var lessonRouter = require('./routes/lesson');
-var movementRouter = require('./routes/movement');
+
+// 训练课程
+var getTrainListRouter = require('./routes/trainList');
+var lessonRouter = require('./routes/lessonList');
+var lessonDetailRouter = require('./routes/lessonDetail');
+// 动作分类
+var moveListRouter = require('./routes/moveList');
+var moveDetailRouter = require('./routes/moveDetail');
+// 训练历程
+var historyRouter = require('./routes/history');
+
 
 var test = require('./routes/test');
-
 var app = express();
 
 //CORS
@@ -35,21 +43,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/login', loginRouter);
+
 app.use('/choice', choiceRouter);
-app.use('/lesson', lessonRouter);
-app.use('/movement', movementRouter);
+app.use('/trainList', getTrainListRouter);
+app.use('/lessonList', lessonRouter);
+app.use('/lessonDetail', lessonDetailRouter);
+app.use('/moveList', moveListRouter);
+app.use('/moveDetail', moveDetailRouter);
+app.use('/history', historyRouter);
 
 app.use('/test', test);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
