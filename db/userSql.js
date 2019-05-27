@@ -5,17 +5,19 @@ var UserSQL = {
     getUserByUsername: 'SELECT COUNT(*) FROM users WHERE username = ? ',
     getUserInfo: 'SELECT * FROM users WHERE username = ?',
 
-    insert: 'INSERT INTO users(username,password) VALUES(?,?)',
+    insertUser: 'INSERT INTO users(username,password) VALUES(?,?)',
     // 训练计划模块
     getTrainList: 'SELECT * FROM trainlist WHERE level = ?',
     getALLTrainList: 'SELECT * FROM trainlist',
     // 课程列表模块
     getLesByTrainId: 'SELECT * FROM lessonlist WHERE lessonId IN (SELECT lessonId FROM traintoles WHERE trainId = ?)',
+    getAllLesList: 'SELECT * FROM lessonlist ',
     getLessonDetail: 'SELECT * FROM lessondetail WHERE lessonId = ?',
     getMoveListByLesId: 'SELECT * FROM movementlist WHERE movementId IN (SELECT movementId FROM lestomove WHERE lessonId = ?)',
     // 动作列表模块
     getMoveListByBody: 'SELECT * FROM movementlist WHERE bodyPart = ?',
-    getMoveDetail: 'SELECT * FROM movedetail WHERE movementId = ?',
+    getMoveListByBodyAndLevel: 'SELECT * FROM movementlist WHERE bodyPart = ? AND level = ?',
+    getMoveDetail: 'SELECT * FROM movementdetail WHERE movementId = ?',
     // 资讯模块
     getchoiceList: 'SELECT * FROM choice',
     getChoiceById: 'select * from choice where id = ?',

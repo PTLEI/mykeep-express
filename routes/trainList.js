@@ -19,6 +19,7 @@ var responseJSON = function (res, ret) {
 router.post('/', function (req, res, next) {
     pool.getConnection((err, connection) => {
         var param = req.body.level;
+        console.log(param, typeof param)
         if (param) {
             connection.query(userSQL.getTrainList, param, function (err, result) {
                 if (result) {

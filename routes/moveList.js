@@ -17,10 +17,12 @@ var responseJSON = function (res, ret) {
     }
 };
 
-router.get('/', (req, res, next) => {
-    var param = req.query || req.params
+router.post('/', (req, res, next) => {
+    // 使用POST请求是为确保前端所传数据格式不变，GET请求会使数据变为string格式
+    var param = req.body;
+    console.log(param);
     pool.getConnection((err, connection) => {
-        connection.query(userSQL.getMoveListByBody, [param.bodyPart], (err, result) => {
+        connection.query(param.level ? userSQL.getMoveListByBodyAndLevel : userSQL.getMoveListByBody, [param.bodyPart, param.level], (err, result) => {
             if (result) {
                 result = {
                     status: 200,
@@ -37,6 +39,5 @@ router.get('/', (req, res, next) => {
         })
     })
 })
-
 
 module.exports = router;

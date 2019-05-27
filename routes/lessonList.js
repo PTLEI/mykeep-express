@@ -19,7 +19,7 @@ var responseJSON = function (res, ret) {
 router.get('/', function (req, res, next) {
     var param = req.query || req.params
     pool.getConnection(function (err, connection) {
-        connection.query(userSQL.getLesByTrainId, [param.id], function (err, result) {
+        connection.query(param.id ? userSQL.getLesByTrainId : userSQL.getAllLesList, [param.id], function (err, result) {
             if (result) {
                 result = {
                     status: 200,
