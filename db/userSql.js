@@ -18,6 +18,7 @@ var UserSQL = {
     getMoveListByBody: 'SELECT * FROM movementlist WHERE bodyPart = ?',
     getMoveListByBodyAndLevel: 'SELECT * FROM movementlist WHERE bodyPart = ? AND level = ?',
     getMoveDetail: 'SELECT * FROM movementdetail WHERE movementId = ?',
+    moveDetailCount: 'SELECT COUNT(*) FROM movementdetail WHERE movementId = ?',
     // 资讯模块
     getchoiceList: 'SELECT * FROM choice',
     getChoiceById: 'select * from choice where id = ?',

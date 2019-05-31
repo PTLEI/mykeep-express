@@ -18,23 +18,28 @@ var responseJSON = function (res, ret) {
 };
 router.get('/', function (req, res, next) {
     var param = req.query || req.params;
-    console.log(param);
     pool.getConnection(function (err, connection) {
-        connection.query(userSQL.getMoveDetail, [param.id], function (err, row) {
-            if (row) {
-                result = {
-                    status: 200,
-                    data: row
-                }
+        connection.query(userSQL.moveDetailCount, [param.id], function (err, row) {
+            if (row[0]["COUNT(*)"]) {
+                connection.query(userSQL.getMoveDetail, [param.id], function (err, result) {
+                    result = {
+                        status: 200,
+                        data: result
+                    };
+                    console.log(11);
+                    responseJSON(res, result);
+                    connection.release();
+                });
             } else {
-                result = {
-                    status: 201,
-                    msg: '查询无结果'
-                }
+                connection.query(userSQL.getMoveDetail, 200001, function (err, result) {
+                    result = {
+                        status: 200,
+                        data: result
+                    };
+                    responseJSON(res, result);
+                    connection.release();
+                });
             }
-            console.log(result)
-            responseJSON(res, result);
-            connection.release();
         })
     })
 })
