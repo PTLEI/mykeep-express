@@ -17,6 +17,9 @@ var lessonDetailRouter = require('./routes/lessonDetail');
 // 动作分类
 var moveListRouter = require('./routes/moveList');
 var moveDetailRouter = require('./routes/moveDetail');
+
+// 修改用户信息
+var modifyInfoRouter = require('./routes/modifyInfo');
 // 训练历程
 var historyRouter = require('./routes/history');
 
@@ -53,6 +56,7 @@ app.use('/lessonList', lessonRouter);
 app.use('/lessonDetail', lessonDetailRouter);
 app.use('/moveList', moveListRouter);
 app.use('/moveDetail', moveDetailRouter);
+app.use('/modifyInfo', modifyInfoRouter);
 app.use('/history', historyRouter);
 
 app.use('/test', test);
