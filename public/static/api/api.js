@@ -82,8 +82,7 @@ let getTrainList = function (...level) {
                 reject(error);
             })
         } else {
-            let param = level[0]
-            console.log(param);
+            let param = level[0];
             axios.post(config.getTrainList, { level: param }).then(res => {
                 resolve(res);
             }).catch(error => {
@@ -176,6 +175,21 @@ let getHistory = function (id) {
     })
 }
 
+/**
+ * 用户信息修改
+ */
+let modifyInfo = function (params) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.modifyInfo, {
+            params
+        }).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
 export default {
     test,
     login,
@@ -186,5 +200,6 @@ export default {
     getLessonDetail,
     getMoveList,
     getMoveDetail,
-    getHistory
+    getHistory,
+    modifyInfo
 }

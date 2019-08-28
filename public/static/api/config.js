@@ -1,8 +1,8 @@
 /**
  * 接口地址
  */
-// let url = 'http://120.79.59.91:3000'
-let url = 'http://localhost:3000'
+let url = 'http://120.79.59.91:3000'
+// let url = 'http://localhost:3000'
 export default {
     // 测试接口
     test: `${url}/test`,
@@ -26,4 +26,6 @@ export default {
     getMoveDetail: `${url}/moveDetail`,
     // 训练历程
     getHistory: `${url}/history`,
+    // 修改用户信息
+    modifyInfo: `${url}/modifyInfo`,
 }
